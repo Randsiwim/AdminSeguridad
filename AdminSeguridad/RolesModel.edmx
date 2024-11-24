@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdministracionSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMenu" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permisos">
+          <Key>
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="PermisoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombrePermiso" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permisos_Menus">
+          <Key>
+            <PropertyRef Name="MenuID" />
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="PermisoID" Type="int" Nullable="false" />
+          <Property Name="PermisoLectura" Type="bit" Nullable="false" />
+          <Property Name="PermisoEscritura" Type="bit" Nullable="false" />
+          <Property Name="PermisoModificacion" Type="bit" Nullable="false" />
+          <Property Name="PermisoEliminacion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRol" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="300" />
+          <Property Name="Clave" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios_Permisos">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="PermisoID" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Permisos_Menus_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="Permisos_Menus" Type="Self.Permisos_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Permisos_Menus">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_Menus_Permisos">
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
+          <End Role="Permisos_Menus" Type="Self.Permisos_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Principal>
+            <Dependent Role="Permisos_Menus">
+              <PropertyRef Name="PermisoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Permisos_Permisos">
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
+          <End Role="Usuarios_Permisos" Type="Self.Usuarios_Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Principal>
+            <Dependent Role="Usuarios_Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Permisos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios_Permisos" Type="Self.Usuarios_Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Usuarios_Permisos">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdministracionSeguridadModelStoreContainer">
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permisos_Menus" EntityType="Self.Permisos_Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios_Permisos" EntityType="Self.Usuarios_Permisos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Permisos_Menus_Menus" Association="Self.FK_Permisos_Menus_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Permisos_Menus" EntitySet="Permisos_Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_Menus_Permisos" Association="Self.FK_Permisos_Menus_Permisos">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="Permisos_Menus" EntitySet="Permisos_Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Permisos_Permisos" Association="Self.FK_Usuarios_Permisos_Permisos">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="Usuarios_Permisos" EntitySet="Usuarios_Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Permisos_Usuarios" Association="Self.FK_Usuarios_Permisos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuarios_Permisos" EntitySet="Usuarios_Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdministracionSeguridadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMenu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Permisos_Menus" Relationship="Self.FK_Permisos_Menus_Menus" FromRole="Menus" ToRole="Permisos_Menus" />
+        </EntityType>
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="PermisoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombrePermiso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Permisos_Menus" Relationship="Self.FK_Permisos_Menus_Permisos" FromRole="Permisos" ToRole="Permisos_Menus" />
+          <NavigationProperty Name="Usuarios_Permisos" Relationship="Self.FK_Usuarios_Permisos_Permisos" FromRole="Permisos" ToRole="Usuarios_Permisos" />
+        </EntityType>
+        <EntityType Name="Permisos_Menus">
+          <Key>
+            <PropertyRef Name="MenuID" />
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="PermisoID" Type="Int32" Nullable="false" />
+          <Property Name="PermisoLectura" Type="Boolean" Nullable="false" />
+          <Property Name="PermisoEscritura" Type="Boolean" Nullable="false" />
+          <Property Name="PermisoModificacion" Type="Boolean" Nullable="false" />
+          <Property Name="PermisoEliminacion" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Permisos_Menus_Menus" FromRole="Permisos_Menus" ToRole="Menus" />
+          <NavigationProperty Name="Permiso" Relationship="Self.FK_Permisos_Menus_Permisos" FromRole="Permisos_Menus" ToRole="Permisos" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Clave" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="Usuarios_Permisos" Relationship="Self.FK_Usuarios_Permisos_Usuarios" FromRole="Usuarios" ToRole="Usuarios_Permisos" />
+        </EntityType>
+        <EntityType Name="Usuarios_Permisos">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="PermisoID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="PermisoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Permiso" Relationship="Self.FK_Usuarios_Permisos_Permisos" FromRole="Usuarios_Permisos" ToRole="Permisos" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuarios_Permisos_Usuarios" FromRole="Usuarios_Permisos" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Permisos_Menus_Menus">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Permisos_Menus" Type="Self.Permisos_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Permisos_Menus">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_Menus_Permisos">
+          <End Role="Permisos" Type="Self.Permiso" Multiplicity="1" />
+          <End Role="Permisos_Menus" Type="Self.Permisos_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Principal>
+            <Dependent Role="Permisos_Menus">
+              <PropertyRef Name="PermisoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Permisos_Permisos">
+          <End Role="Permisos" Type="Self.Permiso" Multiplicity="1" />
+          <End Role="Usuarios_Permisos" Type="Self.Usuarios_Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Principal>
+            <Dependent Role="Usuarios_Permisos">
+              <PropertyRef Name="PermisoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Permisos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuarios_Permisos" Type="Self.Usuarios_Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Usuarios_Permisos">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdministracionSeguridadEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Permisos" EntityType="Self.Permiso" />
+          <EntitySet Name="Permisos_Menus" EntityType="Self.Permisos_Menus" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="Usuarios_Permisos" EntityType="Self.Usuarios_Permisos" />
+          <AssociationSet Name="FK_Permisos_Menus_Menus" Association="Self.FK_Permisos_Menus_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Permisos_Menus" EntitySet="Permisos_Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_Menus_Permisos" Association="Self.FK_Permisos_Menus_Permisos">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="Permisos_Menus" EntitySet="Permisos_Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Permisos_Permisos" Association="Self.FK_Usuarios_Permisos_Permisos">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="Usuarios_Permisos" EntitySet="Usuarios_Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Permisos_Usuarios" Association="Self.FK_Usuarios_Permisos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuarios_Permisos" EntitySet="Usuarios_Permisos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdministracionSeguridadModelStoreContainer" CdmEntityContainer="AdministracionSeguridadEntities">
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="NombreMenu" ColumnName="NombreMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permisos">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Permiso">
+              <MappingFragment StoreEntitySet="Permisos">
+                <ScalarProperty Name="PermisoID" ColumnName="PermisoID" />
+                <ScalarProperty Name="NombrePermiso" ColumnName="NombrePermiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permisos_Menus">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Permisos_Menus">
+              <MappingFragment StoreEntitySet="Permisos_Menus">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="PermisoID" ColumnName="PermisoID" />
+                <ScalarProperty Name="PermisoLectura" ColumnName="PermisoLectura" />
+                <ScalarProperty Name="PermisoEscritura" ColumnName="PermisoEscritura" />
+                <ScalarProperty Name="PermisoModificacion" ColumnName="PermisoModificacion" />
+                <ScalarProperty Name="PermisoEliminacion" ColumnName="PermisoEliminacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios_Permisos">
+            <EntityTypeMapping TypeName="AdministracionSeguridadModel.Usuarios_Permisos">
+              <MappingFragment StoreEntitySet="Usuarios_Permisos">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="PermisoID" ColumnName="PermisoID" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
