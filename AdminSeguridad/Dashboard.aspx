@@ -7,102 +7,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        /* Estilos generales */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
+       /* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
 
-        /* Estilo del header */
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+/* Estilo del header */
+.header {
+    background-color: #003366; 
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
 
-        .header nav {
-            margin-top: 10px;
-        }
+.header nav {
+    margin-top: 10px;
+}
 
-        .header .nav-link {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
+.header .nav-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
 
-        .header .nav-link:hover {
-            color: #ffdd57;
-        }
+.header .nav-link:hover {
+    color: #ffdd57;
+}
 
-        /* Contenido principal */
-        .content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+/* Contenido principal */
+.content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .content h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #333;
-        }
+.content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #003366; 
+}
 
-        .content h3 {
-            margin-top: 40px;
-            font-size: 20px;
-            color: #666;
-        }
+.content h3 {
+    margin-top: 40px;
+    font-size: 20px;
+    color: #666;
+}
 
-        /* Estilo de la tabla */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 16px;
-        }
+/* Estilo de la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
 
-        .table th,
-        .table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
 
-        .table th {
-            background-color: #007bff;
-            color: white;
-        }
+.table th {
+    background-color: #003366; 
+    color: white;
+}
 
-        .table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
-        .table tr:hover {
-            background-color: #f1f1f1;
-        }
+.table tr:hover {
+    background-color: #f1f1f1;
+}
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            font-size: 14px;
-            margin-top: 20px;
-        }
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
     </style>
 </head>
 <body>

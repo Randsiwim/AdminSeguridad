@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 
-namespace AdminSeguridad // Asegúrate de que este coincida con el namespace de tu proyecto
+namespace AdminSeguridad 
 {
     public partial class Usuarios : Page
     {
@@ -117,7 +117,7 @@ namespace AdminSeguridad // Asegúrate de que este coincida con el namespace de 
             TxtRol.Text = string.Empty;
             TxtEmail.Text = string.Empty;
             TxtNombreCompleto.Text = string.Empty;
-            TxtClave.Text = string.Empty; // Limpiar campo Clave
+            TxtClave.Text = string.Empty; 
             HdnIDUsuario.Value = string.Empty;
             LblError.Text = string.Empty;
         }

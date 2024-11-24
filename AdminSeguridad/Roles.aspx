@@ -7,130 +7,150 @@
     <title>Gestión de Roles</title>
     <style>
         /* Estilos internos para la página */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-        .page-title {
-            text-align: center;
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
-        }
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    color: #003366; 
+    margin-bottom: 20px;
+}
 
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
 
-        .message-success {
-            background-color: #d4edda;
-            color: #155724;
-        }
+.message-success {
+    background-color: #c3e6cb; 
+    color: #155724;
+}
 
-        .message-error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
+.message-error {
+    background-color: #f5c6cb; 
+    color: #721c24;
+}
 
-        .actions {
-            text-align: right;
-            margin-bottom: 20px;
-        }
+.actions {
+    text-align: right;
+    margin-bottom: 20px;
+}
 
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
+.btn-primary {
+    background-color: #003366; 
+    color: white;
+}
 
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
+.btn-primary:hover {
+    background-color: #002244; 
+}
 
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
 
-        /* Estilos para el GridView */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+.btn-success:hover {
+    background-color: #218838;
+}
 
-        .table th, .table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
 
-        .table th {
-            background-color: #007bff;
-            color: white;
-        }
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
 
-        /* Estilos para el Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+/* Estilos para el GridView */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            width: 400px;
-            border-radius: 8px;
-            text-align: center;
-        }
+.table th, .table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
-        .modal-buttons {
-            margin-top: 20px;
-        }
+.table th {
+    background-color: #003366; 
+    color: white;
+}
 
-        .label {
-            font-size: 16px;
-            color: #333;
-        }
+/* Estilos para el Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-        .input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.label {
+    font-size: 16px;
+    color: #333;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.input:focus {
+    border-color: #003366; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5); 
+}
+
 
     </style>
 </head>
@@ -179,7 +199,7 @@
     </form>
 
     <script>
-        // Funciones de JavaScript si son necesarias
+        
     </script>
 </body>
 </html>

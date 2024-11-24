@@ -17,14 +17,14 @@ public class AppDbContext : DbContext
     // Configuración adicional
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
-        // Configurar llaves compuestas
+        
         modelBuilder.Entity<PermisoMenu>()
             .HasKey(pm => new { pm.MenuID, pm.PermisoID });
 
         modelBuilder.Entity<UsuarioPermiso>()
             .HasKey(up => new { up.UsuarioID, up.PermisoID });
 
-        base.OnModelCreating(modelBuilder); // Llama al método base si es necesario
+        base.OnModelCreating(modelBuilder); 
     }
 }
 

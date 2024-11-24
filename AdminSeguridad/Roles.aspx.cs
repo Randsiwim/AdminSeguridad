@@ -48,7 +48,7 @@ namespace AdminSeguridad
             string nombreRol = txtNombreRol.Text.Trim();
             if (string.IsNullOrEmpty(nombreRol))
             {
-                // Validar que no esté vacío
+                
                 return;
             }
 
@@ -95,10 +95,10 @@ namespace AdminSeguridad
         // Evento para los botones del GridView (Editar y Eliminar)
         protected void GridViewRoles_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-            // Obtener el índice de la fila desde el CommandArgument
+           
             int index = Convert.ToInt32(e.CommandArgument);
 
-            // Asegúrate de que la fila está dentro del rango válido
+            
             if (index >= 0 && index < GridViewRoles.Rows.Count)
             {
                 // Obtener el ID desde la propiedad DataKeys

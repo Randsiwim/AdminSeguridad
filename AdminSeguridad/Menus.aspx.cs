@@ -18,7 +18,7 @@ namespace AdminSeguridad
                     new { ID = 3, Nombre = "Roles", URL = "/Roles.aspx" }
                 };
 
-                // Asegúrate de que el control Repeater esté bien referenciado
+                
                 RepeaterMenus.DataSource = menus;
                 RepeaterMenus.DataBind();
             }
